@@ -1,11 +1,11 @@
-## How to setup a Typescript Express project : 
+## How to setup a Typescript Express project :
 
 ```
 1. npm --init -y
 ```
 
 ```
-2. npm install -D typescript 
+2. npm install -D typescript
 ```
 
 ```
@@ -33,7 +33,7 @@
 ```
 
 ```
-9. So, basically it is same as using webpack, it compiles or bundles our code into a file and then that file we can deploy on production. 
+9. So, basically it is same as using webpack, it compiles or bundles our code into a file and then that file we can deploy on production.
 ```
 
 ```
@@ -58,10 +58,10 @@ Command defined in prestart will run before the start script runs everytime. So,
     "build": "npx tsc",
     "watch": "npx tsc -w",
     "prestart": "npm run build",
-    "start": "npx nodemon dist/index.js",  
+    "start": "npx nodemon dist/index.js",
 }
 
-This command will now keep on checking for any changes in the compiled code. But, we need to run the watch script and start script simultaneuosly so that everytime a change is made, the server can be re-compiled and restarted. To run some scripts simultaneously, we use concurrently npm package. So, do npm i concurrently first. And the define a new script. 
+This command will now keep on checking for any changes in the compiled code. But, we need to run the watch script and start script simultaneuosly so that everytime a change is made, the server can be re-compiled and restarted. To run some scripts simultaneously, we use concurrently npm package. So, do npm i concurrently first. And the define a new script.
 
 {
     "build": "npx tsc",
@@ -75,4 +75,7 @@ Here --kill-others is a flag, to define if one script fails, then kill other scr
 So, now we will just do npm run dev to run the server.
 ```
 
+```
+11. Though I have already setup eslint and prettier in my react project with alnylum, but this time I read the official docs for both and then implemented it. This time it was more understood and more sleek implementation. And, note that we do not need to install prettier and eslint plugins for the integration, this integration if for making sure that everyone who is contributing the code can be bound to use these. That is why these are integrated in code, rather than telling everyone to setup in vs code. And, we had different scripts for prettier and eslint in our react code at alnylum, but this time, we just did it with one script and that was prebuild. We defined the script : npx eslint . --fix in prebuild script so that everytime the code gets built, it will fix all the linting issues and prettier issues first. And in prestart script we have defined to build the project, which means everytime we will run the project, it will first resolve the linting and prettier issues and then build the app to compile the ts code into js code and then run that js code. Also, we defined a script dev, to run the app while development, so that, whenever we make any change in our code, it can automatically track it and can restart the app. For this script, we use concurrently package to run the nodemon and start process simultaneously. And we have used simple-import-sort package to sort the import statements in our file and have integrated it with eslint.
+```
 
