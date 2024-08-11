@@ -85,3 +85,9 @@ So, now we will just do npm run dev to run the server.
 - We can start redis in our local, using the command : redis-server
 - Now, firstly we will need to create a configuration, so that bullmq can connect to redis. Just like we do for connecting mongoose to mongodb, etc. For this we use ioredis to create a connection and then we pass this connection to the bullmq queue and worker.
 
+## Setting up DTOs : 
+- DTO stands for Data transfer object. Any server for any api transaction, will either be recieving the data to process or will be sending the data to some third party server to process. So to define the type of the data transfer object, we create DTOs in our code. So that it can be defined and specific about what needs to be received by server to process. Defining types is a good thing for sure. 
+- There is one more term called DAO, which nothing but refers to the repository layer only. DAO stands for Data Access Object, and it is called so because from this layer, we access the data store.
+- So these DTOs needs to be validated as well. One of the famous library for validation in ts is zod. So, firstly we define dto and then define validation middlewares so that if any wrong data comes, then we will send error from validator only and will not forward it to controller. 
+- The validator method takes in zod schema, so along with the dto, we will create the zod schema as well. Either we can create the DTO from scratch, or can use zod's infer method to create it based on our zod schema. 
+
