@@ -81,6 +81,7 @@ So, now we will just do npm run dev to run the server.
 
 ## How to setup message queue : 
 
-- You will need to install redis software first in your system. Again google it and get the latest instructions to install. Then we will need to install bullmq and ioredis packages to integrate message queue in our node project.
-- Now, firstly we will need to create a configuration, so that bullmq can connect to redis. Just like we do for connecting mongoose to mongodb, etc
+- You will need to install redis software first in your system. Again google it and get the latest instructions to install. Then we will need to install bullmq and ioredis packages to integrate message queue in our node project. 
+- We can start redis in our local, using the command : redis-server
+- Now, firstly we will need to create a configuration, so that bullmq can connect to redis. Just like we do for connecting mongoose to mongodb, etc. For this we use ioredis to create a connection and then we pass this connection to the bullmq queue and worker.
 
