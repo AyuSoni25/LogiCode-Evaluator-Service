@@ -91,3 +91,7 @@ So, now we will just do npm run dev to run the server.
 - So these DTOs needs to be validated as well. One of the famous library for validation in ts is zod. So, firstly we define dto and then define validation middlewares so that if any wrong data comes, then we will send error from validator only and will not forward it to controller. 
 - The validator method takes in zod schema, so along with the dto, we will create the zod schema as well. Either we can create the DTO from scratch, or can use zod's infer method to create it based on our zod schema. 
 
+## Creating Docker containers programatically :
+- For our usecase in the project, based on the language the user has selected, we need to create a docker container for that language, and then load the user's code in that container and then run that code on the test cases.
+- We know how to create docker containers already, but there are some libraries also available to make it even more easier for us. Dockerode is one of the library which helps us creating docker containers using js. 
+- Once the docker container is created, we will need to attach stream loggers to this container. The stream object actually gives us events
