@@ -12,8 +12,10 @@ import pullImage from './pullImage';
 class PythonExecutor implements CodeExecutorStrategy {
   async execute(
     code: string,
-    inputTestCase: string
+    inputTestCase: string,
+    outputTestCase: string
   ): Promise<ExecutionResponse> {
+    console.log(outputTestCase);
     const rawLogBuffer: Buffer[] = [];
 
     await pullImage(PYTHON_IMAGE);

@@ -9,8 +9,10 @@ import pullImage from './pullImage';
 class JavaExecutor implements CodeExecutorStrategy {
   async execute(
     code: string,
-    inputTestCase: string
+    inputTestCase: string,
+    outputTestCase: string
   ): Promise<ExecutionResponse> {
+    console.log(outputTestCase);
     const rawLogBuffer: Buffer[] = [];
 
     await pullImage(JAVA_IMAGE);
