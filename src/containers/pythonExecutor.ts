@@ -52,8 +52,15 @@ class PythonExecutor implements CodeExecutorStrategy {
         loggerStream,
         rawLogBuffer
       );
-      return { output: codeResponse, status: 'COMPLETED' };
+      if (codeResponse.trim() === outputTestCase.trim()) {
+        return { output: codeResponse, status: 'SUCCESS' };
+      } else {
+        return { output: codeResponse, status: 'WA' };
+      }
     } catch (error) {
+      if (error === 'TLE') {
+        await pythonDockerContainer.kill();
+      }
       return { output: error as string, status: 'ERROR' };
     } finally {
       await pythonDockerContainer.remove();
@@ -64,8 +71,16 @@ class PythonExecutor implements CodeExecutorStrategy {
     loggerStream: NodeJS.ReadableStream,
     rawLogBuffer: Buffer[]
   ): Promise<string> {
+    // TODO: May be moved to the docker helper util
     return new Promise((res, rej) => {
+      const timeout = setTimeout(() => {
+        console.log('Timeout Called');
+        rej('TLE');
+      }, 2000); // We should take the Time limit in this method for each language and then put it here
+      // the problem setter should define the time limit while setting the problem itself
+
       loggerStream.on('end', () => {
+        clearTimeout(timeout);
         console.log(rawLogBuffer);
         const completeBuffer = Buffer.concat(rawLogBuffer);
         const decodedStream = decodeDockerStream(completeBuffer);
