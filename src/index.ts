@@ -3,9 +3,10 @@ import express from 'express';
 
 import bullBoardAdapter from './config/bullBoardConfig';
 import serverConfig from './config/serverConfig';
-import sampleQueueProducer from './producers/sampleQueueProducer';
 import apiRouter from './routes';
+import { SUBMISSION_QUEUE } from './utils/constants';
 import sampleWorker from './workers/sampleWorker';
+import submissionWorker from './workers/submissionWorker';
 
 const app = express();
 
@@ -23,11 +24,11 @@ app.listen(serverConfig.PORT, () => {
   );
 
   sampleWorker('SampleQueue');
-
-  sampleQueueProducer('SampleJob', {
-    name: 'Ayushi',
-    company: 'Microsoft',
-    position: 'SDE2 L61',
-    location: 'Remote | BLR | Noida',
-  });
+  submissionWorker(SUBMISSION_QUEUE);
+  // sampleQueueProducer('SampleJob', {
+  //   name: 'Ayushi',
+  //   company: 'Microsoft',
+  //   position: 'SDE2 L61',
+  //   location: 'Remote | BLR | Noida',
+  // });
 });
